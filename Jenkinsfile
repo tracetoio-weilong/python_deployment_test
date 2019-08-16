@@ -17,9 +17,11 @@ pipeline {
       steps {
         sh '''#!/bin/bash
               echo $jenkinsPythonTest
-              jenkinsPythonTest="test10;$jenkinsPythonTest"
+              jenkinsPythonTest="$BRANCH_NAME;$jenkinsPythonTest"
+              echo $jenkinsPythonTest
            '''
-        println "${env.jenkinsPythonTest}"
+        println "${jenkinsPythonTest}"
+        jenkinsPythonTest="${BRANCH_NAME};$jenkinsPythonTest"
         println "${jenkinsPythonTest}"
 
       }
