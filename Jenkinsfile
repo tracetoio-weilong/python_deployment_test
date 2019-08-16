@@ -24,7 +24,7 @@ pipeline {
 
               echo "$BRANCH_NAME  ===> $branches"
 
-              if [[ $list =~ (^|;)"$item"($|;) ]] ; then
+              if [[ $branches =~ (^|;)"$BRANCH_NAME"($|;) ]] ; then
                 echo "Existing branch"
               else
                 echo "New branch"
