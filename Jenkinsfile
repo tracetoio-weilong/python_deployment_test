@@ -22,7 +22,7 @@ pipeline {
            '''
            script{
         println "${jenkinsPythonTest}";
-        env.jenkinsPythonTest = '${BRANCH_NAME}' + ';' + ' ' + '${jenkinsPythonTest}';
+        env.jenkinsPythonTest = "${BRANCH_NAME}"+";"+"${jenkinsPythonTest}";
         println "${jenkinsPythonTest}";
       }
 
