@@ -21,7 +21,7 @@ pipeline {
               echo $jenkinsPythonTest
            '''
         println "${jenkinsPythonTest}"
-        // jenkinsPythonTest="${BRANCH_NAME};$jenkinsPythonTest"
+        ENV['jenkinsPythonTest'] = '${BRANCH_NAME}' + ';' + ' ' + '${jenkinsPythonTest}'
         println "${jenkinsPythonTest}"
 
       }
