@@ -6,7 +6,6 @@ pipeline {
         sh  '''#bin/bash
 
               whoami
-              printenv
             '''
       }
     }
@@ -16,21 +15,25 @@ pipeline {
       }
       steps {
         sh '''#!/bin/bash
-              echo $jenkinsPythonTest
-              jenkinsPythonTest="$BRANCH_NAME;$jenkinsPythonTest"
-              echo $jenkinsPythonTest
-           '''
-           script{
-              println "${jenkinsPythonTest}";
-              env.jenkinsPythonTest = "${BRANCH_NAME}"+";"+"${jenkinsPythonTest}";
-              println "${jenkinsPythonTest}";
-            }
-        sh '''#!/bin/bash
-              echo $jenkinsPythonTest
-              jenkinsPythonTest="$BRANCH_NAME;$jenkinsPythonTest"
-              echo $jenkinsPythonTest
-           '''
+              FILE=/tmp/jenkinsPythonTest
+              if [ -f $FILE ]; then
+                 branches=$(cat $FILE)
+              else
+                 branches=
+              fi
 
+              echo $branches
+              branches="$BRANCH_NAME;$branches"
+              echo $branches
+
+              if [[ $list =~ (^|;)"$item"($|;) ]] ; then
+                echo "Existing branch"
+              else
+                echo $branches > $FILE
+                echo "deployment starts"
+              fi
+              
+           '''
       }
     }
   }
