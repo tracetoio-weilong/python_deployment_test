@@ -21,10 +21,15 @@ pipeline {
               echo $jenkinsPythonTest
            '''
            script{
-        println "${jenkinsPythonTest}";
-        env.jenkinsPythonTest = "${BRANCH_NAME}"+";"+"${jenkinsPythonTest}";
-        println "${jenkinsPythonTest}";
-      }
+              println "${jenkinsPythonTest}";
+              env.jenkinsPythonTest = "${BRANCH_NAME}"+";"+"${jenkinsPythonTest}";
+              println "${jenkinsPythonTest}";
+            }
+        sh '''#!/bin/bash
+              echo $jenkinsPythonTest
+              jenkinsPythonTest="$BRANCH_NAME;$jenkinsPythonTest"
+              echo $jenkinsPythonTest
+           '''
 
       }
     }
