@@ -22,13 +22,14 @@ pipeline {
                  branches=
               fi
 
-              echo $branches
-              branches="$BRANCH_NAME;$branches"
-              echo $branches
+              echo "$BRANCH_NAME  ===> $branches"
 
               if [[ $list =~ (^|;)"$item"($|;) ]] ; then
                 echo "Existing branch"
               else
+                echo "New branch"
+                branches="$BRANCH_NAME;$branches"
+                echo $branches
                 echo $branches > $FILE
                 echo "deployment starts"
               fi
