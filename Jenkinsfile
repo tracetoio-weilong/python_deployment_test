@@ -20,9 +20,11 @@ pipeline {
               jenkinsPythonTest="$BRANCH_NAME;$jenkinsPythonTest"
               echo $jenkinsPythonTest
            '''
+           script{
         println "${jenkinsPythonTest}";
-        ENV['jenkinsPythonTest'] = '${BRANCH_NAME}' + ';' + ' ' + '${jenkinsPythonTest}';
+        env.jenkinsPythonTest = '${BRANCH_NAME}' + ';' + ' ' + '${jenkinsPythonTest}';
         println "${jenkinsPythonTest}";
+      }
 
       }
     }
